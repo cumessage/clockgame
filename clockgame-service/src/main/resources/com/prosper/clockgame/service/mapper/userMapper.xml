@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mabatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.prosper.whisper.service.mapper.UserMapper">
+    
+    
+
+    
+    <insert id="insertOne" parameterType="user">
+        INSERT INTO
+            user
+            (
+                id, username, email, password, valified, closed, 
+                lastlogin, lastupdate, createtime, varifytime
+            ) 
+        VALUES 
+            (
+                #{id}, #{userName}, #{email}, #{password}, #{valified}, #{closed}, 
+                #{lastlogin}, #{lastupdate}, #{createtime}, #{varifytime}
+            )
+    </insert>
+    
+</mapper>
