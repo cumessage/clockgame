@@ -16,6 +16,10 @@ public class User {
 	
 	private long createTime;
 	
+	public User(long id) {
+		setId(id);
+	}
+	
 	public User(String email, String password) {
 		setEmail(email);
 		setPassword(password);
