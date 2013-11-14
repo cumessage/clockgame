@@ -34,8 +34,8 @@ public class UserDao {
 		return userMapper.getByIds(userIds);
 	}
 
-	public void updateUserInfo(User user) {
-		userMapper.updateUserInfo(user);
+	public void updateOne(User user) {
+		userMapper.updateOne(user);
 	}
 	
 }

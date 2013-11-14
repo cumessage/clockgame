@@ -3,23 +3,36 @@
     PUBLIC "-//mabatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.prosper.whisper.service.mapper.UserMapper">
-    
-    
-
+<mapper namespace="com.prosper.clockgame.service.mapper.UserMapper">
     
     <insert id="insertOne" parameterType="user">
-        INSERT INTO
-            user
-            (
-                id, username, email, password, valified, closed, 
-                lastlogin, lastupdate, createtime, varifytime
-            ) 
+        INSERT INTO user
+            (email, password, name, isclosed, lastupdate, createtime, lastlogin) 
         VALUES 
-            (
-                #{id}, #{userName}, #{email}, #{password}, #{valified}, #{closed}, 
-                #{lastlogin}, #{lastupdate}, #{createtime}, #{varifytime}
-            )
+            (#{email}, #{password}, #{name}, #{isClosed}, #{lastUpdate}, #{createTime}, #{lastLogin})
     </insert>
+    
+    <select id="getByEmail" parameterType="string" resultType="User">
+        SELECT * FROM user where email = #{email}
+    </select>
+    
+    <select id="getByEmailAndPass" parameterType="Map" resultType="User">
+        SELECT * FROM user where email = #{email} and password = #{password}
+    </select>
+    
+    <select id="getById" parameterType="long" resultType="User">
+        SELECT * FROM user where id = #{id} 
+    </select>
+    
+    <select id="getByIds" parameterType="List" resultType="User">
+        SELECT * FROM user where id = #{id}   
+    </select>
+    
+    <update id="updateOne" parameterType="User">
+        UPDATE user
+        SET email = #{email}, password = #{password}, name = #{name}, isclosed = #{isClosed}, 
+            lastupdate = #{lastUpdate}, createtime = #{createTime}, lastlogin = #{lastLogin} 
+        WHERE id = #{id}
+    </update>
     
 </mapper>

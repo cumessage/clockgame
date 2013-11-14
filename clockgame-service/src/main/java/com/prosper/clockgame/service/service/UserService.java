@@ -10,8 +10,6 @@ import com.prosper.clockgame.service.bean.User;
 import com.prosper.clockgame.service.dao.UserDao;
 import com.prosper.clockgame.service.exception.DataExistException;
 import com.prosper.clockgame.service.exception.DataNotExistException;
-import com.prosper.clockgame.service.exception.InvalidParamException;
-import com.prosper.clockgame.service.exception.OperationIsDoneException;
 
 @Service
 public class UserService {
@@ -22,7 +20,7 @@ public class UserService {
 	@Autowired
 	private FriendService friendService;
 	
-	private HashSet<Long> loginSet;
+	private HashSet<Long> loginSet = new HashSet<Long>();
 	
 	/**
 	 * 注册
@@ -31,8 +29,11 @@ public class UserService {
 		if (!isUserExist(email)) {
 			long now = System.currentTimeMillis();
 			User user = new User(email, password);
+			user.setName("");
+			user.setIsClosed(0);
 			user.setCreateTime(now);
 			user.setLastUpdate(now);
+			user.setLastLogin(0);
 			userDao.insert(user);
 		} else {
 			throw new DataExistException();
@@ -66,14 +67,15 @@ public class UserService {
 	/**
 	 * 用户登陆
 	 */
-	public void login(String email, String password) {
+	public long login(String email, String password) {
 		User user = userDao.getByEmailAndPass(email, password);
 		if (user == null) {
 			throw new DataNotExistException();
 		}
 		user.setLastLogin(System.currentTimeMillis());
-		userDao.updateUserInfo(user);
+		userDao.updateOne(user);
 		loginSet.add(user.getId());
+		return user.getId();
 	}
 	
 	/**
@@ -118,7 +120,7 @@ public class UserService {
 	 */
 	private void updateUser(User user) {
 		user.setLastUpdate(System.currentTimeMillis());
-		userDao.updateUserInfo(user);
+		userDao.updateOne(user);
 	}
 	
 	/**

@@ -7,8 +7,6 @@ import org.apache.ibatis.annotations.Param;
 import com.prosper.clockgame.service.bean.User;
 
 public interface UserMapper {
-	
-	public void insertOne(User user);
 
 	public User getByEmail(String email);
 
@@ -20,8 +18,9 @@ public interface UserMapper {
 	
 	public List<User> getByIds(List<Long> userIds);
 
-	public Object updateUserInfo(User user);
+	public void insertOne(User user);
 
+	public Object updateOne(User user);
 	
 	
 }

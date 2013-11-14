@@ -10,11 +10,15 @@ public class User {
 	
 	private String password;
 	
+	private int isClosed;
+	
 	private long lastLogin;
 
 	private long lastUpdate;
 	
 	private long createTime;
+	
+	public User() {}
 	
 	public User(long id) {
 		setId(id);
@@ -79,6 +83,14 @@ public class User {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public int getIsClosed() {
+		return isClosed;
+	}
+
+	public void setIsClosed(int isClosed) {
+		this.isClosed = isClosed;
 	}
 	
 }

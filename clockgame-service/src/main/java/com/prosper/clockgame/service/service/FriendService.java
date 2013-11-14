@@ -34,10 +34,13 @@ public class FriendService {
 		FriendPair friendPair = friendDao.getOne(friendId, userId);
 		if (friendPair != null) {
 			if (friendPair.getStatus() == FriendPair.UNCHECKED) {
+				long now = System.currentTimeMillis();
 				friendPair.setChecked();
+				friendPair.setVarifyTime(now);
 				friendDao.updateOne(friendPair);
 				
 				FriendPair friendPairMirror = new FriendPair(userId, friendId);
+				friendPairMirror.setVarifyTime(now);
 				friendPairMirror.setChecked();
 				friendDao.insertOne(friendPairMirror);
 			} else {

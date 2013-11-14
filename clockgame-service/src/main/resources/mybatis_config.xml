@@ -5,10 +5,10 @@
 
 <configuration>
 	<typeAliases>
-		<typeAlias alias="User" type="com.prosper.whisper.service.bean.User" />
+		<typeAlias alias="User" type="com.prosper.clockgame.service.bean.User" />
 	</typeAliases>
 
 	<mappers>
-		<mapper resource="com/prosper/whisper/service/mapper/userMapper.xml"/>
+		<mapper resource="com/prosper/clockgame/service/mapper/userMapper.xml"/>
 	</mappers>
 </configuration>

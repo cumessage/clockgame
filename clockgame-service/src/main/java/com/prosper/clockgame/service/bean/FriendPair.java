@@ -17,10 +17,15 @@ public class FriendPair {
 	
 	private short status;
 	
+	private long createTime = 0;
+	
+	private long varifyTime = 0;
+	
 	public FriendPair(long userId, long friendId) {
 		setUserid(userId);
 		setFriendId(friendId);
 		setStatus(UNCHECKED);
+		setCreateTime(System.currentTimeMillis());
 	}
 
 	public void setChecked() {
@@ -53,6 +58,22 @@ public class FriendPair {
 
 	public void setStatus(short status) {
 		this.status = status;
+	}
+
+	public long getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(long createTime) {
+		this.createTime = createTime;
+	}
+
+	public long getVarifyTime() {
+		return varifyTime;
+	}
+
+	public void setVarifyTime(long varifyTime) {
+		this.varifyTime = varifyTime;
 	}
 	
 }

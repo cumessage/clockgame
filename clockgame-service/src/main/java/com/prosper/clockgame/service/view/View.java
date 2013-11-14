@@ -1,17 +1,13 @@
 package com.prosper.clockgame.service.view;
 
-import com.prosper.clockgame.service.common.Opcode;
+import com.prosper.clockgame.service.common.OpCodeMap;
 
 public class View {
 	
-	private int opCode = Opcode.SUCCESS;
+	private int opCode = OpCodeMap.SUCCESS;
 	
 	public View() {}
 	
-	public View(int opCode) {
-		this.setOpCode(opCode);
-	}
-
 	public int getOpCode() {
 		return opCode;
 	}

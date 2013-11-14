@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mabatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.prosper.clockgame.service.mapper.FriendMapper">
+
+    <select id="getOne" parameterType="map" resultType="User">
+        SELECT * FROM friend where userid = #{userId} and friendid = #{friendId}
+    </select>
+    
+    <select id="getListByUserId" parameterType="long" resultType="FriendPair">
+        SELECT * FROM friend where userid = #{userId}
+    </select>
+    
+    <insert id="insertOne" parameterType="user">
+        INSERT INTO friend
+            (userid, friendid, status, createtime, varifytime) 
+        VALUES 
+            (#{userId}, #{friendId}, #{status}, #{createtime}, #{varifytime})
+    </insert>
+    
+    <update id="updateOne" parameterType="User">
+        UPDATE friend
+        SET status = #{status}, createtime = #{createtime}, varifytime = #{varifytime} 
+        WHERE userid = #{userId} and friendid = #{friendid}
+    </update>
+    
+</mapper>
