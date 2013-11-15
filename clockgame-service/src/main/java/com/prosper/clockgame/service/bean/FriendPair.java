@@ -21,8 +21,10 @@ public class FriendPair {
 	
 	private long varifyTime = 0;
 	
+	public FriendPair() {}
+	
 	public FriendPair(long userId, long friendId) {
-		setUserid(userId);
+		setUserId(userId);
 		setFriendId(friendId);
 		setStatus(UNCHECKED);
 		setCreateTime(System.currentTimeMillis());
@@ -36,11 +38,11 @@ public class FriendPair {
 		setStatus(UNCHECKED);
 	}
 
-	public long getUserid() {
+	public long getUserId() {
 		return userid;
 	}
 
-	public void setUserid(long userid) {
+	public void setUserId(long userid) {
 		this.userid = userid;
 	}
 

@@ -16,6 +16,12 @@ public interface FriendMapper {
 
 	public void updateOne(FriendPair friendPair);
 
-	public List<Long> getListByUserId(long userId);
+	public List<FriendPair> getListByUserId(
+			@Param("userId") long userId,
+			@Param("status") short status);
+
+	public List<FriendPair> getListByFriendIdAndStatus(
+			@Param("friendId") long friendId, 
+			@Param("status") short status);
 	
 }

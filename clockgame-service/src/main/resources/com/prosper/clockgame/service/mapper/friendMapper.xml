@@ -5,25 +5,50 @@
 
 <mapper namespace="com.prosper.clockgame.service.mapper.FriendMapper">
 
-    <select id="getOne" parameterType="map" resultType="User">
-        SELECT * FROM friend where userid = #{userId} and friendid = #{friendId}
+    <select id="getOne" parameterType="map" resultType="FriendPair">
+        SELECT 
+            userid as userId,
+            friendid as friendId,
+            status,
+            createtime as createTime,
+            varifytime as varifyTime
+        FROM friend 
+        WHERE userid = #{userId} AND friendid = #{friendId}
     </select>
     
     <select id="getListByUserId" parameterType="long" resultType="FriendPair">
-        SELECT * FROM friend where userid = #{userId}
+        SELECT 
+            userid as userId,
+            friendid as friendId,
+            status,
+            createtime as createTime,
+            varifytime as varifyTime 
+        FROM friend 
+        WHERE userid = #{userId} and status = #{status}
     </select>
     
-    <insert id="insertOne" parameterType="user">
+    <select id="getListByFriendIdAndStatus" parameterType="long" resultType="FriendPair">
+        SELECT 
+            userid as userId,
+            friendid as friendId,
+            status,
+            createtime as createTime,
+            varifytime as varifyTime 
+        FROM friend 
+        WHERE friendid = #{friendId} AND status = #{status}
+    </select>
+    
+    <insert id="insertOne" parameterType="FriendPair">
         INSERT INTO friend
             (userid, friendid, status, createtime, varifytime) 
         VALUES 
-            (#{userId}, #{friendId}, #{status}, #{createtime}, #{varifytime})
+            (#{userId}, #{friendId}, #{status}, #{createTime}, #{varifyTime})
     </insert>
     
-    <update id="updateOne" parameterType="User">
+    <update id="updateOne" parameterType="FriendPair">
         UPDATE friend
-        SET status = #{status}, createtime = #{createtime}, varifytime = #{varifytime} 
-        WHERE userid = #{userId} and friendid = #{friendid}
+        SET status = #{status}, createtime = #{createTime}, varifytime = #{varifyTime} 
+        WHERE userid = #{userId} and friendid = #{friendId}
     </update>
     
 </mapper>

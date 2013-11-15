@@ -10,6 +10,7 @@ import com.prosper.clockgame.service.bean.User;
 import com.prosper.clockgame.service.dao.UserDao;
 import com.prosper.clockgame.service.exception.DataExistException;
 import com.prosper.clockgame.service.exception.DataNotExistException;
+import com.prosper.clockgame.service.exception.InvalidParamException;
 
 @Service
 public class UserService {
@@ -126,10 +127,20 @@ public class UserService {
 	/**
 	 * 添加朋友
 	 */
-	private void addFriend(long userId, long friendId) {
+	public void addFriend(long userId, long friendId) {
 		if (isUserExist(userId) && isUserExist(friendId)) {
 			friendService.addFriend(userId, friendId);
+		} else {
+			throw new InvalidParamException();
 		}
+	}
+	
+	/**
+	 * 获得朋友申请列表
+	 */
+	public List<User> getFriendsRequest(long userId) {
+		List<Long> userIds = friendService.getFriendRequestIdList(userId);
+		return getUserInfoList(userIds);
 	}
 	
 	/**
@@ -139,5 +150,7 @@ public class UserService {
 		List<Long> userIds = friendService.getFriendIdList(userId);
 		return getUserInfoList(userIds);
 	}
+
+	
 
 }

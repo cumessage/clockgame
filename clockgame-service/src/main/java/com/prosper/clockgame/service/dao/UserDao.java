@@ -1,5 +1,6 @@
 package com.prosper.clockgame.service.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,11 @@ public class UserDao {
 	}
 	
 	public List<User> getListByIds(List<Long> userIds) {
-		return userMapper.getByIds(userIds);
+		if (userIds.size() > 0) {
+			return userMapper.getByIds(userIds);
+		} else {
+			return new ArrayList<User>();
+		}
 	}
 
 	public void updateOne(User user) {

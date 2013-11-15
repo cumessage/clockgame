@@ -6,9 +6,11 @@
 <configuration>
 	<typeAliases>
 		<typeAlias alias="User" type="com.prosper.clockgame.service.bean.User" />
+		<typeAlias alias="FriendPair" type="com.prosper.clockgame.service.bean.FriendPair" />
 	</typeAliases>
 
 	<mappers>
 		<mapper resource="com/prosper/clockgame/service/mapper/userMapper.xml"/>
+		<mapper resource="com/prosper/clockgame/service/mapper/friendMapper.xml"/>
 	</mappers>
 </configuration>

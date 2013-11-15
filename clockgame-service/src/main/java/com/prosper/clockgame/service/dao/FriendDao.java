@@ -27,8 +27,12 @@ public class FriendDao {
 		friendMapper.updateOne(friendPair);
 	}
 
-	public List<Long> getListByUserId(long userId) {
-		return friendMapper.getListByUserId(userId);
+	public List<FriendPair> getListByUserIdAndStatus(long userId, short status) {
+		return friendMapper.getListByUserId(userId, status);
+	}
+
+	public List<FriendPair> getListByFriendIdAndStatus(long userId, short status) {
+		return friendMapper.getListByFriendIdAndStatus(userId, status);
 	}
 	
 }

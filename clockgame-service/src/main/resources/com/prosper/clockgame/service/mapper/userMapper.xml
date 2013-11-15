@@ -25,7 +25,12 @@
     </select>
     
     <select id="getByIds" parameterType="List" resultType="User">
-        SELECT * FROM user where id = #{id}   
+        SELECT * FROM user 
+        where id IN
+            <foreach item="id" index="index" collection="list" open="("
+                separator="," close=")">
+                #{id}
+            </foreach>   
     </select>
     
     <update id="updateOne" parameterType="User">

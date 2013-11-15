@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.prosper.clockgame.service.bean.User;
 import com.prosper.clockgame.service.service.FriendService;
 import com.prosper.clockgame.service.service.UserService;
+import com.prosper.clockgame.service.view.FriendsView;
 import com.prosper.clockgame.service.view.LoginView;
 import com.prosper.clockgame.service.view.UserView;
 import com.prosper.clockgame.service.view.View;
@@ -78,17 +79,26 @@ public class UserController {
 	@RequestMapping(value="/{userId}/friend/unchecked", method=RequestMethod.POST)
 	@ResponseBody
 	public View addFriend(
-			@RequestParam("friendId") long friendId,
+			@RequestBody Map<String, String> requestMap,
 			@PathVariable("userId") long userId) {
-		friendService.addFriend(userId, friendId);
+		long friendId = Long.parseLong(requestMap.get("friendId"));
+		userService.addFriend(userId, friendId);
 		return new View();
+	}
+	
+	@RequestMapping(value="/{userId}/friend/unchecked", method=RequestMethod.GET)
+	@ResponseBody
+	public View getFriendsRequest(@PathVariable("userId") long userId) {
+		List<User> userList = userService.getFriendsRequest(userId);
+		return new FriendsView(userList);
 	}
 	
 	@RequestMapping(value="/{userId}/friend/", method=RequestMethod.POST)
 	@ResponseBody
 	public View varifyFriend(
-			@RequestParam("friendId") long friendId,
+			@RequestBody Map<String, String> requestMap,
 			@PathVariable("userId") long userId) {
+		long friendId = Long.parseLong(requestMap.get("friendId"));
 		friendService.varifyFriend(userId, friendId);
 		return new View();
 	}
@@ -97,8 +107,9 @@ public class UserController {
 	@ResponseBody
 	public View getFriends(@PathVariable("userId") long userId) {
 		List<User> userList = userService.getFriends(userId);
-		// TODO write user list view
-		return new View();
+		return new FriendsView(userList);
 	}
+	
+	
 	
 }
