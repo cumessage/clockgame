@@ -12,12 +12,17 @@ public class Game {
 	/**
 	 * 开始时间
 	 */
-	private long playtime;
+	private long playTime;
 	
 	/**
-	 * 参与时间
+	 * 创建者
 	 */
-	private Long createTime;
+	private User creator;
+	
+	/**
+	 * 创建时间
+	 */
+	private long createTime;
 	
 	/**
 	 * 游戏模板
@@ -25,26 +30,27 @@ public class Game {
 	private GameTemplate template;
 	
 	/**
-	 * 创建者id
-	 */
-	private User creator;
-	
-	/**
 	 * 参与者及对应参与时间表
 	 */
 	private Map<User, Long> member;
-
-	/**
-	 * 检查当前游戏是否能再加入成员
-	 */
+	
 	public boolean joinable() {
-		if (getTemplate().getLimit() > member.size()) {
+		if (member.size() < template.getLimit()) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 	
+	public boolean isJoined(long userId) {
+		for (User user: member.keySet()) {
+			if (user.getId() == userId) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public long getId() {
 		return id;
 	}
@@ -53,28 +59,12 @@ public class Game {
 		this.id = id;
 	}
 
-	public long getPlaytime() {
-		return playtime;
-	}
-
-	public void setPlaytime(long playtime) {
-		this.playtime = playtime;
-	}
-
-	public Long getCreateTime() {
+	public long getCreateTime() {
 		return createTime;
 	}
 
-	public void setCreateTime(Long createTime) {
+	public void setCreateTime(long createTime) {
 		this.createTime = createTime;
-	}
-
-	public User getCreator() {
-		return creator;
-	}
-
-	public void setCreator(User creator) {
-		this.creator = creator;
 	}
 
 	public Map<User, Long> getMember() {
@@ -85,6 +75,14 @@ public class Game {
 		this.member = member;
 	}
 
+	public User getCreator() {
+		return creator;
+	}
+
+	public void setCreator(User creator) {
+		this.creator = creator;
+	}
+
 	public GameTemplate getTemplate() {
 		return template;
 	}
@@ -92,5 +90,15 @@ public class Game {
 	public void setTemplate(GameTemplate template) {
 		this.template = template;
 	}
+
+	public long getPlayTime() {
+		return playTime;
+	}
+
+	public void setPlayTime(long playTime) {
+		this.playTime = playTime;
+	}
+
+	
 	
 }

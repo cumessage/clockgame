@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mabatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.prosper.clockgame.service.mapper.GameMapper">
+    
+    <insert id="insertOne" useGeneratedKeys="true" keyProperty="id" parameterType="Game">
+        INSERT INTO game
+            (playtime, creatorid, templateid, createtime) 
+        VALUES
+            (#{playTime}, #{creator.id}, #{template.id}, #{createTime})
+    </insert>
+    
+    <select id="getOne" parameterType="long" resultType="Game">
+        SELECT id, playtime, creatorid as `creator.id`, templateid as `template.id`, createtime as createTime
+        FROM game
+        WHERE id = #{id}
+    </select>
+    
+</mapper>

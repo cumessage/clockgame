@@ -12,8 +12,8 @@ public class GameDao {
 	@Autowired
 	private GameMapper gameMapper;
 
-	public long insertOne(Game game) {
-		return gameMapper.insertOne(game);
+	public void insertOne(Game game) {
+		gameMapper.insertOne(game);
 	}
 
 	public Game getOne(long gameId) {

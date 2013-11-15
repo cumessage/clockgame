@@ -19,6 +19,12 @@ public class GameTemplate {
 	
 	private short limit = DEFAULT_LIMIT;
 	
+	public GameTemplate() {}
+	
+	public GameTemplate(int id) {
+		setId(id);
+	}
+	
 	public GameTemplate(int id, String name, String description) {
 		setId(id);
 		setName(name);

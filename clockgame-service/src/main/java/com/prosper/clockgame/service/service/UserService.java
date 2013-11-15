@@ -100,7 +100,7 @@ public class UserService {
 	/**
 	 * 获取用户列表
 	 */
-	private List<User> getUserInfoList(List<Long> userIds) {
+	public List<User> getUserInfoList(List<Long> userIds) {
 		return userDao.getListByIds(userIds);
 	}
 	

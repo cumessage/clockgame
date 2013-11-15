@@ -14,15 +14,15 @@ public class GameMemberDao {
 	@Autowired
 	private GameMemberMapper gameMemberMapper;
 
-	public void insertOne(long gameId, long userId) {
-		gameMemberMapper.insertOne(gameId, userId);
+	public void insertOne(long gameId, long userId, long createTime) {
+		gameMemberMapper.insertOne(gameId, userId, createTime);
 	}
 	
-	public Map<String, String> getOne(long gameId, long userId) {
-		return gameMemberMapper.getOne(gameId);
+	public Map<Long, Long> getOne(long gameId, long userId) {
+		return gameMemberMapper.getOne(gameId, userId);
 	}
 
-	public List<Long> getList(long gameId) {
+	public List<Map<Long, Long>> getList(long gameId) {
 		return gameMemberMapper.getList(gameId);
 	}
 
