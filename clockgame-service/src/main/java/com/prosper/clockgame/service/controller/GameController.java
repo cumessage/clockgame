@@ -1,5 +1,6 @@
 package com.prosper.clockgame.service.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.prosper.clockgame.service.bean.Game;
+import com.prosper.clockgame.service.bean.GameData;
 import com.prosper.clockgame.service.service.GameService;
+import com.prosper.clockgame.service.view.GameDataView;
 import com.prosper.clockgame.service.view.GameView;
 import com.prosper.clockgame.service.view.View;
 
@@ -64,20 +67,24 @@ public class GameController {
 		return new GameView(game);
 	}
 	
-	@RequestMapping(value="/{gameId}/result", method=RequestMethod.GET)
+	@RequestMapping(value="/{gameId}/data/current", method=RequestMethod.GET)
 	@ResponseBody
 	public View getResults(
 			@PathVariable("gameId") long gameId) { 
 		// TODO 
-		return new View();
+		List<GameData> gameDataList = gameService.getDate(gameId);
+		return new GameDataView(gameDataList);
 	}
 	
-	@RequestMapping(value="/{gameId}/result/{userid}", method=RequestMethod.POST)
+	@RequestMapping(value="/{gameId}/data/{userId}/{step}", method=RequestMethod.POST)
 	@ResponseBody
 	public View postResult(
+			@PathVariable("step") int step,
 			@PathVariable("gameId") long gameId,
-			@PathVariable("userid") long userId) { 
-		// TODO 
+			@PathVariable("userId") long userId,
+			@RequestBody Map<String, String> requestMap) {
+		String value = requestMap.get("value");
+		gameService.addDate(gameId, userId, step, value);
 		return new View();
 	}
 	

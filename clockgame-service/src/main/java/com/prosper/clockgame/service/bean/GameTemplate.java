@@ -1,13 +1,33 @@
 package com.prosper.clockgame.service.bean;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GameTemplate {
 	
 	public static final short CAMERO = 1;
 	public static final short GPS = 2;
-	
 	public static final short DEFAULT_LIMIT = 20;
+	
+	private static Map<Integer, GameTemplate> gameTemplateMap = new HashMap<Integer, GameTemplate>();
+	
+	static {
+		GameTemplate gameTemplate = new GameTemplate();
+		gameTemplate.setId(1);
+		gameTemplate.setName("Running Game");
+		gameTemplate.setDescription("Running Game for us");
+		gameTemplate.setLimit((short)20);
+		
+		List<Step> stepList = new ArrayList<Step>();
+		stepList.add(new Step("run", 1, "100"));
+		stepList.add(new Step("answer", 2, "a"));
+		stepList.add(new Step("run", 1, "100"));
+		
+		gameTemplate.setSteps(stepList);
+		gameTemplateMap.put(1, gameTemplate);
+	}
 	
 	private int id;
 	
@@ -18,6 +38,10 @@ public class GameTemplate {
 	private List<Step> steps;
 	
 	private short limit = DEFAULT_LIMIT;
+	
+	public static Map<Integer, GameTemplate> getMap() {
+		return gameTemplateMap;
+	}
 	
 	public GameTemplate() {}
 	
@@ -31,11 +55,19 @@ public class GameTemplate {
 		setDescription(description);
 	}
 	
-	public class Step {
+	public static class Step {
 		
 		private String info;
 		
 		private Integer action;
+		
+		private String value;
+		
+		public Step(String info, Integer action, String value) {
+			this.info = info;
+			this.action = action;
+			this.value = value;
+		}
 
 		public String getInfo() {
 			return info;
@@ -51,6 +83,14 @@ public class GameTemplate {
 
 		public void setAction(Integer action) {
 			this.action = action;
+		}
+
+		public String getValue() {
+			return value;
+		}
+
+		public void setValue(String value) {
+			this.value = value;
 		}
 
 	}

@@ -7,17 +7,19 @@ import org.apache.ibatis.annotations.Param;
 
 public interface GameMemberMapper {
 	
-	public void insertOne(
-			@Param("gameId") long gameId, 
-			@Param("userId") long userId, 
-			@Param("createTime") long createTime);
-
 	public List<Map<Long, Long>> getList(long gameId);
 
 	public Map<Long, Long> getOne(
 			@Param("gameId") long gameId, 
 			@Param("userId") long userId);
-
+	
+	public List<Long> getListByMember(long userId);
+	
+	public void insertOne(
+			@Param("gameId") long gameId, 
+			@Param("userId") long userId, 
+			@Param("createTime") long createTime);
+	
 	public Object deleteOne(
 			@Param("gameId") long gameId, 
 			@Param("userId") long userId);

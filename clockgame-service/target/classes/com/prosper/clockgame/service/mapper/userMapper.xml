@@ -27,8 +27,7 @@
     <select id="getByIds" parameterType="List" resultType="User">
         SELECT * FROM user 
         where id IN
-            <foreach item="id" index="index" collection="list" open="("
-                separator="," close=")">
+            <foreach item="id" index="index" collection="list" open="(" separator="," close=")">
                 #{id}
             </foreach>   
     </select>

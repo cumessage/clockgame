@@ -8,6 +8,7 @@
 		<typeAlias alias="User" type="com.prosper.clockgame.service.bean.User" />
 		<typeAlias alias="FriendPair" type="com.prosper.clockgame.service.bean.FriendPair" />
 		<typeAlias alias="Game" type="com.prosper.clockgame.service.bean.Game" />
+		<typeAlias alias="GameData" type="com.prosper.clockgame.service.bean.GameData" />
 	</typeAliases>
 
 	<mappers>

@@ -1,5 +1,6 @@
 package com.prosper.clockgame.service.bean;
 
+import java.util.List;
 import java.util.Map;
 
 public class Game {
@@ -30,12 +31,12 @@ public class Game {
 	private GameTemplate template;
 	
 	/**
-	 * 参与者及对应参与时间表
+	 * 参与者
 	 */
-	private Map<User, Long> member;
+	private List<User> memberList;
 	
 	public boolean joinable() {
-		if (member.size() < template.getLimit()) {
+		if (getMemberList().size() < template.getLimit()) {
 			return true;
 		} else {
 			return false;
@@ -43,7 +44,7 @@ public class Game {
 	}
 	
 	public boolean isJoined(long userId) {
-		for (User user: member.keySet()) {
+		for (User user: getMemberList()) {
 			if (user.getId() == userId) {
 				return true;
 			}
@@ -65,14 +66,6 @@ public class Game {
 
 	public void setCreateTime(long createTime) {
 		this.createTime = createTime;
-	}
-
-	public Map<User, Long> getMember() {
-		return member;
-	}
-
-	public void setMember(Map<User, Long> member) {
-		this.member = member;
 	}
 
 	public User getCreator() {
@@ -97,6 +90,14 @@ public class Game {
 
 	public void setPlayTime(long playTime) {
 		this.playTime = playTime;
+	}
+
+	public List<User> getMemberList() {
+		return memberList;
+	}
+
+	public void setMemberList(List<User> memberList) {
+		this.memberList = memberList;
 	}
 
 	

@@ -7,15 +7,33 @@
     
     <insert id="insertOne" useGeneratedKeys="true" keyProperty="id" parameterType="Game">
         INSERT INTO game
-            (playtime, creatorid, templateid, createtime) 
+            (playtime, creatorid, creatorname, templateid, createtime) 
         VALUES
-            (#{playTime}, #{creator.id}, #{template.id}, #{createTime})
+            (#{playTime}, #{creator.id}, #{creator.name}, #{template.id}, #{createTime})
     </insert>
     
     <select id="getOne" parameterType="long" resultType="Game">
-        SELECT id, playtime, creatorid as `creator.id`, templateid as `template.id`, createtime as createTime
+        SELECT id, playtime, creatorid as `creator.id`, creatorname as `creator.name`, templateid as `template.id`, createtime as createTime
         FROM game
         WHERE id = #{id}
+    </select>
+    
+    <select id="getListByIds" parameterType="List" resultType="Game">
+        SELECT id, playtime, creatorid as `creator.id`, creatorname as `creator.name`, templateid as `template.id`, createtime as createTime
+        FROM game
+        WHERE id IN
+            <foreach item="id" index="index" collection="list" open="(" separator="," close=")">
+                #{id}
+            </foreach>
+    </select>
+    
+    <select id="getListByCreatorIds" parameterType="List" resultType="Game">
+        SELECT id, playtime, creatorid as `creator.id`, creatorname as `creator.name`, templateid as `template.id`, createtime as createTime
+        FROM game
+        WHERE creatorid IN
+            <foreach item="id" index="index" collection="list" open="(" separator="," close=")">
+                #{id}
+            </foreach>
     </select>
     
 </mapper>

@@ -24,6 +24,12 @@
         WHERE gameid = #{gameId}
     </select>
     
+    <select id="getListByMember" parameterType="long" resultType="Long">
+        SELECT gameid as gameId
+        FROM game_member
+        WHERE userid = #{userId}
+    </select>
+    
     <delete id="deleteOne" parameterType="map">
         DELETE FROM game_member
         WHERE gameid = #{gameId} AND userid = #{userId} 

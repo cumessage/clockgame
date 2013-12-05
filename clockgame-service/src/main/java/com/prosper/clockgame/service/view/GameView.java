@@ -1,6 +1,10 @@
 package com.prosper.clockgame.service.view;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.prosper.clockgame.service.bean.Game;
+import com.prosper.clockgame.service.bean.User;
 
 public class GameView extends View {
 	
@@ -13,6 +17,8 @@ public class GameView extends View {
 	private long createTime; 
 	
 	private int templateId;
+	
+	private List<UserView> memberList; 
 
 	public GameView(Game game) {
 		this.setCreatorName(game.getCreator().getName());
@@ -20,6 +26,28 @@ public class GameView extends View {
 		this.setCreateTime(game.getCreateTime());
 		this.setId(game.getId());
 		this.setTemplateId(game.getTemplate().getId());
+		
+		setMemberList(new ArrayList<UserView>());
+		for (User user: game.getMemberList()) {
+			getMemberList().add(new UserView(user)); 
+		}
+	}
+	
+	public class UserView {
+
+		private String name;
+		
+		public UserView(User user) {
+			this.name = user.getName();
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
 	}
 
 	public long getId() {
@@ -60,6 +88,14 @@ public class GameView extends View {
 
 	public void setCreatorName(String creatorName) {
 		CreatorName = creatorName;
+	}
+
+	public List<UserView> getMemberList() {
+		return memberList;
+	}
+
+	public void setMemberList(List<UserView> memberList) {
+		this.memberList = memberList;
 	}
 	
 }
